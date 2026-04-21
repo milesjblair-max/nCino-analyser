@@ -1,0 +1,33 @@
+{
+  "name": "salesforce-ncino-analyzer",
+  "version": "1.0.0",
+  "description": "Claude-powered analyzer for Salesforce/nCino configurations with MCP support",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "client": "node client.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "salesforce",
+    "ncino",
+    "claude",
+    "ai",
+    "metadata",
+    "analyzer",
+    "mcp",
+    "model context protocol"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/typescript-sdk": "^0.1.0",
+    "axios": "^1.6.2",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
+    "xml2js": "^0.6.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
