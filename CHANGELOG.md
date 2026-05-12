@@ -2,6 +2,13 @@
 
 Append-only. Newest entries on top. Each entry: date, what changed, why (in one sentence if needed).
 
+## 2026-05-12 — Add Timeline tab
+
+- New `src/pages/timeline.tsx`: phase-by-phase forward view, each card lists the anchors and derived events landing inside it. Current phase outlined; past phases dimmed.
+- `timeline.json` gained `derived_events`: conception window (1- and 2-month assumptions), Day 180, and earliest/latest expected birth (40-week gestation).
+- `src/lib/phase.ts` gained `allDerivedEvents`, `derivedEventDate`, `formatLongDate`.
+- Tab order: Plan / **Timeline** / Log / Dashboard / Settings.
+
 ## 2026-05-12 — Initial build
 
 - Scaffolded Vite + React + TypeScript + Tailwind project at repo root.

@@ -81,5 +81,42 @@
     "What are the four scores doing? Minimum bar: three of four trending correctly.",
     "What is the state of the 3↔4 loop? Activations decreasing in frequency, intensity, or both?",
     "Have the internal questions changed? November vs. June dominant thinking."
+  ],
+  "derived_events": [
+    {
+      "id": "conception_earliest",
+      "from_anchor": "december_pregnancy_window",
+      "offset_days": 30,
+      "label": "Likely conception (1-month assumption)",
+      "kind": "pregnancy"
+    },
+    {
+      "id": "conception_latest",
+      "from_anchor": "december_pregnancy_window",
+      "offset_days": 60,
+      "label": "Likely conception (2-month assumption)",
+      "kind": "pregnancy"
+    },
+    {
+      "id": "day_180",
+      "from_anchor": "detox_day_1",
+      "offset_days": 180,
+      "label": "Day 180 — re-evaluate Habits 1 & 2",
+      "kind": "review"
+    },
+    {
+      "id": "expected_birth_earliest",
+      "from_anchor": "december_pregnancy_window",
+      "offset_days": 310,
+      "label": "Expected birth (earliest, ~40 weeks from 1-month conception)",
+      "kind": "pregnancy"
+    },
+    {
+      "id": "expected_birth_latest",
+      "from_anchor": "december_pregnancy_window",
+      "offset_days": 340,
+      "label": "Expected birth (latest, ~40 weeks from 2-month conception)",
+      "kind": "pregnancy"
+    }
   ]
 }
