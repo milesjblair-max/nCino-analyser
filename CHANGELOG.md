@@ -2,6 +2,12 @@
 
 Append-only. Newest entries on top. Each entry: date, what changed, why (in one sentence if needed).
 
+## 2026-05-12 — Roadmap: switch to event-based layout
+
+- Roadmap no longer renders a strict proportional time axis. The previous version left ~600px of blank space in the post-Day-180 stretch (no events between Feb 2027 and Oct 2027).
+- New layout: vertical list of milestones, each row contains a phase-colour stripe on the left, the event in the centre, and a "+ N days" gap label between consecutive events. Phase progression remains visible via the continuous stripe.
+- File: `src/pages/roadmap.tsx`.
+
 ## 2026-05-12 — Roadmap tab + mobile UI fixes
 
 - New `src/pages/roadmap.tsx`: visual roadmap with phase bands proportional to duration and milestone dots on a vertical spine. Detox phases (P2–P4) shown in solid dark green; pregnancy milestones in rose; Day 180 review in amber.
