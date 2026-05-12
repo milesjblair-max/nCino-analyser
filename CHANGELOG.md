@@ -2,6 +2,13 @@
 
 Append-only. Newest entries on top. Each entry: date, what changed, why (in one sentence if needed).
 
+## 2026-05-12 — Dark-green palette
+
+- White-dominant theme with a dark forest-green header band (`emerald-900`).
+- Active tab indicator, active form buttons, score selections, and submit buttons all use `emerald-900` with `emerald-800` hover.
+- Hover borders on un-selected option chips tint to `emerald-700`.
+- Status chips keep their semantic palette (emerald / amber / rose) so green/amber/red still read as on-track / watching / off-track.
+
 ## 2026-05-12 — Add Timeline tab
 
 - New `src/pages/timeline.tsx`: phase-by-phase forward view, each card lists the anchors and derived events landing inside it. Current phase outlined; past phases dimmed.

@@ -75,8 +75,8 @@ function Btn({ label, active, onClick }: { label: string; active: boolean; onCli
       className={
         "px-3 py-1.5 rounded border text-sm " +
         (active
-          ? "bg-stone-900 text-white border-stone-900"
-          : "bg-white text-stone-800 border-stone-300 hover:border-stone-500")
+          ? "bg-emerald-900 text-white border-emerald-900"
+          : "bg-white text-stone-800 border-stone-300 hover:border-emerald-700")
       }
     >
       {label}
