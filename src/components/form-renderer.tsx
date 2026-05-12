@@ -56,7 +56,7 @@ export function FormRenderer({
       <div className="pt-2">
         <button
           type="submit"
-          className="px-4 py-2 rounded bg-stone-900 text-white text-sm font-medium hover:bg-stone-700"
+          className="px-4 py-2 rounded bg-emerald-900 text-white text-sm font-medium hover:bg-emerald-800"
         >
           Save entry
         </button>
@@ -131,8 +131,8 @@ function Field({
                 className={
                   "w-9 h-9 rounded text-sm border " +
                   (value === n
-                    ? "bg-stone-900 text-white border-stone-900"
-                    : "bg-white text-stone-700 border-stone-300 hover:border-stone-500")
+                    ? "bg-emerald-900 text-white border-emerald-900"
+                    : "bg-white text-stone-700 border-stone-300 hover:border-emerald-700")
                 }
               >
                 {n}
@@ -169,8 +169,8 @@ function Field({
                 className={
                   "px-3 py-1 rounded border text-sm " +
                   (value === opt
-                    ? "bg-stone-900 text-white border-stone-900"
-                    : "bg-white text-stone-700 border-stone-300 hover:border-stone-500")
+                    ? "bg-emerald-900 text-white border-emerald-900"
+                    : "bg-white text-stone-700 border-stone-300 hover:border-emerald-700")
                 }
               >
                 {opt}
@@ -214,8 +214,8 @@ function Field({
                 className={
                   "px-3 py-1 rounded border text-sm " +
                   (selected.includes(opt.value)
-                    ? "bg-stone-900 text-white border-stone-900"
-                    : "bg-white text-stone-700 border-stone-300 hover:border-stone-500")
+                    ? "bg-emerald-900 text-white border-emerald-900"
+                    : "bg-white text-stone-700 border-stone-300 hover:border-emerald-700")
                 }
               >
                 {opt.label}

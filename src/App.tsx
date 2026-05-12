@@ -14,10 +14,10 @@ export default function App() {
 
   return (
     <div className="min-h-full flex flex-col">
-      <header className="bg-white border-b border-stone-200">
+      <header className="bg-emerald-900 text-white">
         <div className="max-w-4xl mx-auto px-4 py-3">
-          <h1 className="text-lg font-semibold text-stone-900">Behaviour Tracker</h1>
-          <p className="text-xs text-stone-500">Personal. Local. The artefact is the modification loop.</p>
+          <h1 className="text-lg font-semibold">Behaviour Tracker</h1>
+          <p className="text-xs text-emerald-100/80">Personal. Local. The artefact is the modification loop.</p>
         </div>
       </header>
       <TabBar active={tab} onChange={setTab} />

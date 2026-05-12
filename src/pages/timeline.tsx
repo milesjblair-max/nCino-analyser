@@ -85,7 +85,7 @@ export function TimelinePage() {
               className={
                 "border rounded p-4 " +
                 (isCurrent
-                  ? "border-stone-900 bg-white"
+                  ? "border-emerald-900 bg-white shadow-sm"
                   : isPast
                   ? "border-stone-200 bg-stone-50 opacity-70"
                   : "border-stone-300 bg-white")
@@ -103,7 +103,7 @@ export function TimelinePage() {
                   className={
                     "text-[10px] uppercase tracking-wide px-2 py-0.5 rounded border " +
                     (isCurrent
-                      ? "border-stone-900 bg-stone-900 text-white"
+                      ? "border-emerald-900 bg-emerald-900 text-white"
                       : isPast
                       ? "border-stone-300 text-stone-500"
                       : "border-stone-300 text-stone-600")

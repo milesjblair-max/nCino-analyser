@@ -21,7 +21,7 @@ export function TabBar({ active, onChange }: { active: TabId; onChange: (t: TabI
             className={
               "px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors " +
               (active === t.id
-                ? "border-stone-900 text-stone-900"
+                ? "border-emerald-900 text-emerald-900"
                 : "border-transparent text-stone-500 hover:text-stone-800")
             }
           >
