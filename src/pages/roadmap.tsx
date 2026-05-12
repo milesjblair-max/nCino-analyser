@@ -12,6 +12,7 @@ import {
   allAnchors,
   allDerivedEvents,
   allPhases,
+  currentPhase,
   daysBetween,
   derivedEventDate,
   formatLongDate,
@@ -84,12 +85,24 @@ export function RoadmapPage() {
 
   const lastDate = allEntries[allEntries.length - 1]?.date ?? today;
 
+  const currentPhaseObj = currentPhase(today);
+  const currentPhaseStartDate = anchorById[currentPhaseObj.starts]?.date ?? today;
+  const currentPhaseEndDate = currentPhaseObj.ends ? anchorById[currentPhaseObj.ends]?.date ?? null : null;
+
   return (
     <div className="space-y-4">
       <div>
         <h2 className="text-base font-semibold text-stone-900">Roadmap</h2>
+        <div className="text-xs text-stone-600 mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+          <span className="inline-flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-700" />
+            <span className="font-medium">Today:</span> {formatLongDate(today)}
+          </span>
+          <span className="text-stone-400">·</span>
+          <span>in <span className="font-medium">{currentPhaseObj.id} {currentPhaseObj.name}</span></span>
+        </div>
         <p className="text-xs text-stone-500 mt-1">
-          {formatLongDate(today)} → {formatLongDate(lastDate)}. Each phase has a description card with milestones nested below.
+          Plan runs through {formatLongDate(lastDate)}. Each phase has a description card with milestones nested below.
         </p>
       </div>
 
@@ -134,6 +147,9 @@ export function RoadmapPage() {
                     {p.ends ? <> → {formatLongDate(endDate)}</> : <> → indefinite</>}
                     {" · "}depressive-load: <span className="font-medium">{p.depressive_load_cadence}</span>
                   </div>
+                  {isCurrent && p.ends && (
+                    <PhaseProgress today={today} startDate={anchorById[p.starts]?.date ?? today} endDate={endDate} />
+                  )}
                 </div>
 
                 {/* Milestones inside this phase */}
@@ -169,6 +185,34 @@ export function RoadmapPage() {
       <div className="border-t border-stone-200 pt-3 text-[11px] text-stone-500">
         <span className="font-medium text-stone-700">Stripe colour</span> tracks phase progression — detox (P2–P4) is the bold dark green stretch.{" "}
         <span className="font-medium text-stone-700">Milestone tone:</span> dark green = today, rose = pregnancy-derived, amber = review, white = anchor.
+      </div>
+    </div>
+  );
+}
+
+function PhaseProgress({
+  today,
+  startDate,
+  endDate,
+}: {
+  today: string;
+  startDate: string;
+  endDate: string;
+}) {
+  const totalDays = Math.max(1, daysBetween(startDate, endDate));
+  const elapsed = Math.max(0, Math.min(totalDays, daysBetween(startDate, today)));
+  const remaining = Math.max(0, totalDays - elapsed);
+  const pct = Math.round((elapsed / totalDays) * 100);
+  return (
+    <div className="mt-2">
+      <div className="flex items-center justify-between text-[10px] text-stone-600">
+        <span>
+          Day {elapsed + 1} of {totalDays} · {pct}%
+        </span>
+        <span>{remaining}d remaining</span>
+      </div>
+      <div className="mt-1 h-1.5 bg-stone-200 rounded overflow-hidden">
+        <div className="h-full bg-emerald-700" style={{ width: `${pct}%` }} />
       </div>
     </div>
   );

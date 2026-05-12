@@ -2,7 +2,7 @@
 // Pure read view — no logging happens here.
 
 import { allOutcomes, allKpis, kpiById, mostRecent, outcomeStatus, thresholdStatus } from "../lib/kpi";
-import { currentPhase, lastAnchor, nextAnchor, daysBetween, todayString } from "../lib/phase";
+import { currentPhase, lastAnchor, nextAnchor, daysBetween, todayString, formatLongDate } from "../lib/phase";
 import type { Kpi } from "../lib/types";
 
 const STATUS_COLORS: Record<string, string> = {
@@ -28,6 +28,10 @@ export function PlanPage() {
   return (
     <div className="space-y-8">
       <section>
+        <div className="flex items-center gap-2 text-xs text-stone-600 mb-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-700" />
+          <span className="font-medium">Today:</span> {formatLongDate(today)}
+        </div>
         <h2 className="text-base font-semibold text-stone-900 mb-2">Current phase</h2>
         <div className="border border-stone-300 rounded p-4 bg-white">
           <div className="text-lg font-medium">{phase.name}</div>
