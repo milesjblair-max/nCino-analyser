@@ -1,0 +1,131 @@
+{
+  "_note": "Bi-daily log, every two days, evening. Fields render in order. type=group emits a nested set of inputs per item.",
+  "title": "Bi-daily log",
+  "cadence_days": 2,
+  "fields": [
+    {
+      "id": "entry_date",
+      "type": "date",
+      "label": "Date of entry",
+      "required": true
+    },
+    {
+      "id": "habit_1_instances",
+      "type": "number",
+      "label": "Habit 1 instances since last entry",
+      "min": 0,
+      "kpi": "habit_instances"
+    },
+    {
+      "id": "habit_2_instances",
+      "type": "number",
+      "label": "Habit 2 instances since last entry",
+      "min": 0,
+      "kpi": "habit_instances"
+    },
+    {
+      "id": "habit_3_instances",
+      "type": "number",
+      "label": "Habit 3 instances since last entry",
+      "min": 0,
+      "kpi": "habit_instances"
+    },
+    {
+      "id": "habit_4_instances",
+      "type": "number",
+      "label": "Habit 4 instances since last entry",
+      "min": 0,
+      "kpi": "habit_instances"
+    },
+    {
+      "id": "habit_2_details",
+      "type": "group_per_count",
+      "label": "For each Habit 2 instance",
+      "count_from": "habit_2_instances",
+      "fields": [
+        { "id": "state", "type": "radio", "label": "State at time", "options": ["settled", "activated"], "kpi": "habit_2_state" },
+        { "id": "insight", "type": "textarea", "label": "Insight (if any)", "kpi": "habit_2_state" }
+      ]
+    },
+    {
+      "id": "habit_4_decisions",
+      "type": "group_per_count",
+      "label": "For each Habit 4 instance — decisions pending in next 72 hours",
+      "count_from": "habit_4_instances",
+      "fields": [
+        { "id": "pending_decision", "type": "textarea", "label": "Pending decision note", "kpi": "habit_4_bad_decisions" }
+      ]
+    },
+    {
+      "id": "loop_flags",
+      "type": "group_per_count",
+      "label": "For each Habit 3 or 4 instance — part of 3↔4 loop pattern (linked instance within 24h)?",
+      "count_from": "habit_3_plus_4",
+      "fields": [
+        { "id": "is_loop", "type": "checkbox", "label": "Part of loop", "kpi": "loop_activations" }
+      ]
+    },
+    {
+      "id": "stress",
+      "type": "score",
+      "label": "Stress (1–10 peak, not average)",
+      "min": 1,
+      "max": 10,
+      "kpi": "stress_score"
+    },
+    {
+      "id": "anxiety",
+      "type": "score",
+      "label": "Anxiety (1–10 peak)",
+      "min": 1,
+      "max": 10,
+      "kpi": "anxiety_score"
+    },
+    {
+      "id": "depressive_load",
+      "type": "score",
+      "label": "Depressive load (1–10 peak)",
+      "min": 1,
+      "max": 10,
+      "kpi": "depressive_load"
+    },
+    {
+      "id": "presence",
+      "type": "score",
+      "label": "Presence (1–10 peak)",
+      "min": 1,
+      "max": 10,
+      "kpi": "presence_score"
+    },
+    {
+      "id": "automatic_moment",
+      "type": "textarea",
+      "label": "Most automatic moment of the period",
+      "kpi": "automatic_moment"
+    },
+    {
+      "id": "work_flags",
+      "type": "multiselect",
+      "label": "Work behaviour flags",
+      "options": [
+        { "value": "rushed_ahead", "label": "Rushed ahead" },
+        { "value": "took_on_others_work", "label": "Took on others' work" },
+        { "value": "couldnt_stop_at_completion", "label": "Couldn't stop at completion" },
+        { "value": "manufactured_urgency", "label": "Manufactured urgency" }
+      ],
+      "kpi": "work_behaviour_flags"
+    },
+    {
+      "id": "loop_break_attempts",
+      "type": "number",
+      "label": "Loop-break attempts (20-min delay practised, regardless of outcome)",
+      "min": 0,
+      "kpi": "loop_break_attempts"
+    },
+    {
+      "id": "loop_break_notes",
+      "type": "textarea",
+      "label": "Loop-break notes (optional)"
+    }
+  ]
+}

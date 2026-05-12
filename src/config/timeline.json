@@ -1,0 +1,85 @@
+{
+  "_note": "Anchor dates default to 2026 since today is 2026-05-12. Edit any date here to shift the plan. Phases are computed in src/lib/phase.ts by checking today against these anchors in order.",
+  "anchors": [
+    { "id": "phase_0_start", "date": "2026-05-12", "label": "Phase 0 start (now)" },
+    { "id": "phase_1_start", "date": "2026-08-01", "label": "Phase 1 — final stretch begins" },
+    { "id": "final_34_instance", "date": "2026-08-31", "label": "Final 3&4 instance (planned)" },
+    { "id": "detox_day_1", "date": "2026-09-01", "label": "Day 1 of 90-day detox" },
+    { "id": "accenture_flag", "date": "2026-09-21", "label": "Accenture roll-off flag (3 weeks before King Size)" },
+    { "id": "kingsize_start", "date": "2026-10-12", "label": "King Size start (≈week 5 of detox)" },
+    { "id": "phase_4_start", "date": "2026-11-16", "label": "Phase 4 — late detox" },
+    { "id": "day_90", "date": "2026-11-30", "label": "Day 90 — detox concludes & decision point" },
+    { "id": "december_pregnancy_window", "date": "2026-12-01", "label": "December pregnancy attempts (conditional on Day 90)" }
+  ],
+  "phases": [
+    {
+      "id": "P0",
+      "name": "Phase 0 — Gradual reduction",
+      "starts": "phase_0_start",
+      "ends": "phase_1_start",
+      "focus": "Step Habit 1 down. Build Habit 2 state-recognition. Reduce 3&4 to monthly. Install work-pattern interventions.",
+      "habit_2_log_cadence": "bi-daily",
+      "depressive_load_cadence": "bi-daily"
+    },
+    {
+      "id": "P1",
+      "name": "Phase 1 — Final stretch",
+      "starts": "phase_1_start",
+      "ends": "detox_day_1",
+      "focus": "Final 3&4 date set, communicated to wife. Clinician identified. Substitute pathways defined.",
+      "habit_2_log_cadence": "bi-daily",
+      "depressive_load_cadence": "bi-daily"
+    },
+    {
+      "id": "P2",
+      "name": "Phase 2 — Detox + Accenture exit",
+      "starts": "detox_day_1",
+      "ends": "kingsize_start",
+      "focus": "Detox weeks 1–4. Accenture flag late September. Sleep disruption / irritability expected.",
+      "habit_2_log_cadence": "bi-daily",
+      "depressive_load_cadence": "daily"
+    },
+    {
+      "id": "P3",
+      "name": "Phase 3 — Detox + King Size start",
+      "starts": "kingsize_start",
+      "ends": "phase_4_start",
+      "focus": "Hardest phase. First-30-days scope at King Size. Decision velocity rule. External check person engaged.",
+      "habit_2_log_cadence": "bi-daily",
+      "depressive_load_cadence": "daily"
+    },
+    {
+      "id": "P4",
+      "name": "Phase 4 — Late detox",
+      "starts": "phase_4_start",
+      "ends": "day_90",
+      "focus": "Day 90 markers evaluated continuously. By mid-November you have a read on whether December is on track.",
+      "habit_2_log_cadence": "bi-daily",
+      "depressive_load_cadence": "daily"
+    },
+    {
+      "id": "P5",
+      "name": "Phase 5 — Day 90 decision",
+      "starts": "day_90",
+      "ends": "december_pregnancy_window",
+      "focus": "Four-question evaluation. Pregnancy attempts begin if all favourable.",
+      "habit_2_log_cadence": "bi-daily",
+      "depressive_load_cadence": "daily"
+    },
+    {
+      "id": "P6",
+      "name": "Re-entry",
+      "starts": "december_pregnancy_window",
+      "ends": null,
+      "focus": "Habits 3 and 4 do not return. Habit 2 may return ≤2/week with state check. Re-evaluate at Day 180 (~March).",
+      "habit_2_log_cadence": "bi-daily",
+      "depressive_load_cadence": "bi-daily"
+    }
+  ],
+  "day_90_questions": [
+    "Did the detox hold? Lapse threshold: ≤2 unplanned instances across 90 days.",
+    "What are the four scores doing? Minimum bar: three of four trending correctly.",
+    "What is the state of the 3↔4 loop? Activations decreasing in frequency, intensity, or both?",
+    "Have the internal questions changed? November vs. June dominant thinking."
+  ]
+}
