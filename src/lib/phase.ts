@@ -74,3 +74,31 @@ export function lastAnchor(today = todayString()): Anchor | null {
 export function isDailyDepressiveLoadDay(today = todayString()): boolean {
   return currentPhase(today).depressive_load_cadence === "daily";
 }
+
+export type DerivedEvent = {
+  id: string;
+  from_anchor: string;
+  offset_days: number;
+  label: string;
+  kind: string;
+};
+
+export function allDerivedEvents(): DerivedEvent[] {
+  return (timeline as any).derived_events ?? [];
+}
+
+export function derivedEventDate(e: DerivedEvent): string {
+  const a = anchorById[e.from_anchor];
+  if (!a) return "";
+  const d = parseDate(a.date);
+  d.setDate(d.getDate() + e.offset_days);
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+export function formatLongDate(iso: string): string {
+  const d = parseDate(iso);
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}

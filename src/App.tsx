@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { TabBar, type TabId } from "./components/tab-bar";
 import { PlanPage } from "./pages/plan";
+import { TimelinePage } from "./pages/timeline";
 import { LogPage } from "./pages/log";
 import { DashboardPage } from "./pages/dashboard";
 import { SettingsPage } from "./pages/settings";
@@ -22,6 +23,7 @@ export default function App() {
       <TabBar active={tab} onChange={setTab} />
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-6">
         {tab === "plan" && <PlanPage />}
+        {tab === "timeline" && <TimelinePage />}
         {tab === "log" && <LogPage />}
         {tab === "dashboard" && <DashboardPage />}
         {tab === "settings" && <SettingsPage />}

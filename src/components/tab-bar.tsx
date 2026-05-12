@@ -1,9 +1,10 @@
 // Top tab bar. No router — App keeps a string state and renders one page.
 
-export type TabId = "plan" | "log" | "dashboard" | "settings";
+export type TabId = "plan" | "timeline" | "log" | "dashboard" | "settings";
 
 const TABS: { id: TabId; label: string }[] = [
   { id: "plan", label: "Plan" },
+  { id: "timeline", label: "Timeline" },
   { id: "log", label: "Log" },
   { id: "dashboard", label: "Dashboard" },
   { id: "settings", label: "Settings" },

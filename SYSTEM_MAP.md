@@ -10,7 +10,7 @@ change it.
 |---|---|
 | `src/config/outcomes.json` | The seven outcomes, the KPIs serving each, and status rules. |
 | `src/config/kpi-definitions.json` | KPI metadata: label, scale, source form, threshold rules, direction, outcomes served. |
-| `src/config/timeline.json` | Phase boundaries (anchor ids), anchor dates, depressive-load cadence per phase, Day 90 questions. |
+| `src/config/timeline.json` | Phase boundaries (anchor ids), anchor dates, depressive-load cadence per phase, Day 90 questions, derived events (conception/birth/Day 180). |
 | `src/config/forms/bi-daily.json` | Bi-daily log field schema. |
 | `src/config/forms/weekly.json` | Weekly synthesis schema. |
 | `src/config/forms/monthly.json` | Monthly review schema. |
@@ -30,6 +30,7 @@ change it.
 | File | What it does |
 |---|---|
 | `src/pages/plan.tsx` | Current phase card, anchor distances, seven outcomes with rolled-up KPI status. |
+| `src/pages/timeline.tsx` | Forward-looking phase-by-phase view from today onward. Each phase card lists the anchors and derived events falling inside it. |
 | `src/pages/log.tsx` | Buttons → renders the chosen form via FormRenderer. Saves to localStorage. Daily mini-form auto-shows during detox phases. |
 | `src/pages/dashboard.tsx` | KPI sparklines, Habit 2 verification rate, scrollable internal-question audit. |
 | `src/pages/settings.tsx` | Export JSON, two-step reset, data counts, modification instructions. |
@@ -69,6 +70,8 @@ change it.
 - **Day 90 lapse threshold**: ≤2 unplanned 3/4 instances across 90 days (from the plan; encoded as a note in `outcomes.json` O2.status_rules).
 - **Sparkline window**: 28 most recent entries on the Dashboard; 4 weeks on monthly review trend reflections.
 - **Re-entry rule**: Habit 2 limit set at 2 instances/week post-Day 90 (from the plan). Not enforced by the app — there's nothing to enforce; the rule lives in `timeline.json` P6.focus as a reminder.
+- **Conception assumption**: 1–2 months from December attempts begin → conception likely Jan–Feb 2027. Gestation modelled as 280 days. Expected-birth window shows both ends. Edit `timeline.json` → `derived_events` to change the assumption.
+- **Day 180**: Encoded as a derived event (180 days from `detox_day_1`). Lands around end of Feb 2027. Re-evaluate Habit 2 cadence per the plan.
 - **Loop instance detection**: The bi-daily form asks per-instance whether each Habit 3/4 instance was part of the loop. We don't auto-detect from timestamps because the bi-daily granularity doesn't have them — the user codes it manually.
 - **Two-step reset**: 5-second wait + explicit confirm button. Adjust in `src/pages/settings.tsx`.
 
