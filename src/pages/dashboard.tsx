@@ -1,85 +1,90 @@
-// Dashboard. KPI list with sparklines + threshold-driven status, plus a
-// scrollable internal-question audit pulled from weekly syntheses.
+// Dashboard. Visual-first: logging consistency, KPI status summary,
+// score trend chart, Habit 2 verification, internal-question audit.
+// Add a new section by adding another <section> and a component.
 
-import { Sparkline } from "../components/sparkline";
-import {
-  allKpis,
-  habit2VerificationRate,
-  lastN,
-  mostRecent,
-  numericSeries,
-  thresholdStatus,
-} from "../lib/kpi";
+import { LogConsistency } from "../components/log-consistency";
+import { ScoreChart } from "../components/score-chart";
+import { habit2VerificationRate, statusCounts } from "../lib/kpi";
 import { KEYS, getLogs } from "../lib/storage";
 
-const STATUS_COLORS: Record<string, string> = {
-  green: "text-emerald-700",
-  amber: "text-amber-700",
-  red: "text-rose-700",
-  unknown: "text-stone-400",
-};
-
 export function DashboardPage() {
-  const kpis = allKpis();
   const h2 = habit2VerificationRate();
+  const counts = statusCounts();
+  const tracked = counts.green + counts.amber + counts.red + counts.unknown;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <section>
-        <h2 className="text-base font-semibold text-stone-900 mb-2">Score trends (last 28 entries)</h2>
-        <div className="border border-stone-300 rounded bg-white overflow-x-auto">
-          <table className="w-full text-sm min-w-[420px]">
-            <thead className="text-left text-xs text-stone-500 border-b border-stone-200">
-              <tr>
-                <th className="px-3 py-2">KPI</th>
-                <th className="px-3 py-2">Latest</th>
-                <th className="px-3 py-2">Sparkline</th>
-                <th className="px-3 py-2">Outcomes</th>
-              </tr>
-            </thead>
-            <tbody>
-              {kpis
-                .filter((k) => k.thresholds || k.direction)
-                .map((k) => {
-                  const series = numericSeries(k.id);
-                  const values = lastN(series, 28).map((p) => p.value);
-                  const v = mostRecent(k.id);
-                  const status = thresholdStatus(k.id);
-                  return (
-                    <tr key={k.id} className="border-b border-stone-100 last:border-0">
-                      <td className="px-3 py-2 font-medium text-stone-800">{k.label}</td>
-                      <td className={"px-3 py-2 font-mono " + STATUS_COLORS[status]}>
-                        {v == null ? "—" : v}
-                      </td>
-                      <td className={"px-3 py-2 " + STATUS_COLORS[status]}>
-                        <Sparkline values={values} min={1} max={10} />
-                      </td>
-                      <td className="px-3 py-2 text-xs text-stone-500">{k.outcomes.join(", ")}</td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+        <LogConsistency />
+      </section>
+
+      <section>
+        <h2 className="text-sm font-semibold text-stone-900 mb-2">KPI status</h2>
+        <div className="grid grid-cols-4 gap-2 text-center">
+          <StatusBlock label="on track" count={counts.green} total={tracked} tone="emerald" />
+          <StatusBlock label="watching" count={counts.amber} total={tracked} tone="amber" />
+          <StatusBlock label="off track" count={counts.red} total={tracked} tone="rose" />
+          <StatusBlock label="no data" count={counts.unknown} total={tracked} tone="stone" />
         </div>
       </section>
 
       <section>
-        <h2 className="text-base font-semibold text-stone-900 mb-2">Habit 2 7-day verification</h2>
-        <div className="border border-stone-300 rounded p-4 bg-white text-sm">
+        <h2 className="text-sm font-semibold text-stone-900 mb-2">Score trends</h2>
+        <div className="border border-stone-200 rounded p-3 bg-white">
+          <ScoreChart windowSize={28} />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-sm font-semibold text-stone-900 mb-2">Habit 2 — 7-day action verification</h2>
+        <div className="border border-stone-200 rounded p-3 bg-white text-sm">
           {h2.rate == null ? (
             <span className="text-stone-500">No verifications recorded yet.</span>
           ) : (
-            <span>
-              <span className="font-mono text-lg">{Math.round(h2.rate * 100)}%</span>{" "}
-              <span className="text-stone-500">
-                ({h2.yes} of {h2.total} reflective instances acted on within 7 days)
-              </span>
-            </span>
+            <div>
+              <div className="flex items-baseline gap-2">
+                <span className="text-2xl font-semibold text-emerald-900">{Math.round(h2.rate * 100)}%</span>
+                <span className="text-stone-500 text-xs">
+                  ({h2.yes} of {h2.total} reflective instances acted on within 7 days)
+                </span>
+              </div>
+              <div className="mt-2 h-2 bg-stone-200 rounded overflow-hidden">
+                <div className="h-full bg-emerald-700" style={{ width: `${Math.round(h2.rate * 100)}%` }} />
+              </div>
+            </div>
           )}
         </div>
       </section>
 
       <InternalQuestionAudit />
+    </div>
+  );
+}
+
+function StatusBlock({
+  label,
+  count,
+  total,
+  tone,
+}: {
+  label: string;
+  count: number;
+  total: number;
+  tone: "emerald" | "amber" | "rose" | "stone";
+}) {
+  const toneClass =
+    tone === "emerald"
+      ? "border-emerald-300 bg-emerald-50 text-emerald-900"
+      : tone === "amber"
+      ? "border-amber-300 bg-amber-50 text-amber-900"
+      : tone === "rose"
+      ? "border-rose-300 bg-rose-50 text-rose-900"
+      : "border-stone-300 bg-stone-50 text-stone-700";
+  return (
+    <div className={"rounded border px-2 py-2 " + toneClass}>
+      <div className="text-xl font-semibold leading-none">{count}</div>
+      <div className="text-[10px] uppercase tracking-wide mt-1">{label}</div>
+      <div className="text-[10px] opacity-70">of {total}</div>
     </div>
   );
 }
@@ -91,12 +96,11 @@ function InternalQuestionAudit() {
 
   return (
     <section>
-      <h2 className="text-base font-semibold text-stone-900 mb-2">Internal-question audit</h2>
+      <h2 className="text-sm font-semibold text-stone-900 mb-2">Internal-question audit</h2>
       <p className="text-xs text-stone-500 mb-2">
-        The three dominant questions from each weekly synthesis, newest first. Watch for the shift from urgency framing
-        to presence framing.
+        Three dominant questions from each weekly synthesis, newest first. Watch for the shift away from urgency framing.
       </p>
-      <div className="border border-stone-300 rounded bg-white max-h-96 overflow-y-auto divide-y divide-stone-200">
+      <div className="border border-stone-200 rounded bg-white max-h-96 overflow-y-auto divide-y divide-stone-200">
         {weeklies.length === 0 && (
           <div className="px-4 py-3 text-sm text-stone-500">No weekly syntheses yet.</div>
         )}

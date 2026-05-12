@@ -2,6 +2,17 @@
 
 Append-only. Newest entries on top. Each entry: date, what changed, why (in one sentence if needed).
 
+## 2026-05-12 — Dashboard rebuild + tagline change
+
+- Header subtitle changed from "Personal. Local. The artefact is the modification loop." to "Habits, scores, milestones — through the phases." Footer simplified to "Data lives on this device. Back up regularly from Settings."
+- Dashboard rebuilt around visual summaries:
+  - **Bi-daily logging** card: total logged vs expected, missed count, last-log age, current streak, and a 28-day grid (logged / covered / missed / pre-data colour-coded).
+  - **KPI status**: four-block summary (on track / watching / off track / no data).
+  - **Score trends**: full-width multi-line SVG with all four scores (stress, anxiety, depressive load, presence) overlaid, reference lines at 3/5/7, and a legend showing the latest value per score.
+  - **Habit 2 verification** now has a progress bar.
+  - Internal-question audit unchanged.
+- New helpers in `lib/kpi.ts`: `loggingStats()`, `statusCounts()`.
+
 ## 2026-05-12 — Backup, restore, and stale-backup reminder
 
 - Settings → Backup uses the Web Share API (iOS Share Sheet → Save to Files / iCloud Drive / email). Falls back to a download on desktop.

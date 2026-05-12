@@ -109,3 +109,116 @@ export function outcomeStatus(o: Outcome): KpiStatus {
   }
   return worst;
 }
+
+// Logging stats. Bi-daily logs are expected every 2 days; we compute how
+// many are missing in the last `windowDays` and per-day status for a grid.
+export type DayStatus = "logged" | "covered" | "missed" | "empty";
+export type LoggingStats = {
+  windowDays: number;
+  loggedInWindow: number;
+  expectedInWindow: number;
+  missedInWindow: number;
+  daysSinceLast: number | null;
+  currentStreak: number;
+  grid: { date: string; daysAgo: number; status: DayStatus }[];
+};
+
+function isoDate(d: Date): string {
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+export function loggingStats(windowDays = 28): LoggingStats {
+  const now = new Date();
+  const biDaily = getLogs(KEYS.biDaily);
+  const daily = getLogs(KEYS.dailyDetox);
+
+  const loggedDates = new Set<string>([
+    ...biDaily.map((l) => l.entry_date).filter(Boolean),
+    ...daily.map((l) => l.entry_date).filter(Boolean),
+  ]);
+
+  const allBiDaily = biDaily
+    .map((l) => l.entry_date)
+    .filter(Boolean)
+    .sort();
+
+  const firstBiDailyMs = allBiDaily.length ? new Date(allBiDaily[0] + "T00:00:00").getTime() : null;
+  const lastBiDailyMs = allBiDaily.length ? new Date(allBiDaily[allBiDaily.length - 1] + "T00:00:00").getTime() : null;
+
+  // Days since last bi-daily.
+  let daysSinceLast: number | null = null;
+  if (lastBiDailyMs != null) {
+    daysSinceLast = Math.max(0, Math.floor((now.getTime() - lastBiDailyMs) / (1000 * 60 * 60 * 24)));
+  }
+
+  // Bi-daily logs that fall in the window.
+  const cutoff = new Date(now);
+  cutoff.setDate(cutoff.getDate() - windowDays);
+  const inWindow = biDaily.filter((l) => {
+    if (!l.entry_date) return false;
+    return new Date(l.entry_date + "T00:00:00").getTime() >= cutoff.getTime();
+  });
+
+  // Expected count: the window is windowDays long; one log every 2 days.
+  // But until you start logging, "missed" doesn't make sense — so cap
+  // expected at days_since_first_log/2.
+  const daysFromFirst = firstBiDailyMs == null
+    ? 0
+    : Math.floor((now.getTime() - firstBiDailyMs) / (1000 * 60 * 60 * 24));
+  const expected = Math.floor(Math.min(windowDays, daysFromFirst) / 2);
+  const missed = Math.max(0, expected - inWindow.length);
+
+  // Build per-day grid (oldest first).
+  const grid: LoggingStats["grid"] = [];
+  for (let i = windowDays - 1; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    const dateStr = isoDate(d);
+    const prev = new Date(d);
+    prev.setDate(prev.getDate() - 1);
+    const prevStr = isoDate(prev);
+    const dMs = new Date(dateStr + "T00:00:00").getTime();
+
+    let status: DayStatus;
+    if (firstBiDailyMs == null || dMs < firstBiDailyMs) {
+      status = "empty";
+    } else if (loggedDates.has(dateStr)) {
+      status = "logged";
+    } else if (loggedDates.has(prevStr)) {
+      status = "covered";
+    } else {
+      status = "missed";
+    }
+    grid.push({ date: dateStr, daysAgo: i, status });
+  }
+
+  // Current streak: how many trailing (most-recent) grid entries are logged or covered.
+  let streak = 0;
+  for (let i = grid.length - 1; i >= 0; i--) {
+    if (grid[i].status === "logged" || grid[i].status === "covered") streak += 1;
+    else break;
+  }
+
+  return {
+    windowDays,
+    loggedInWindow: inWindow.length,
+    expectedInWindow: expected,
+    missedInWindow: missed,
+    daysSinceLast,
+    currentStreak: streak,
+    grid,
+  };
+}
+
+// Status counts across all KPIs that have thresholds.
+export function statusCounts(): Record<KpiStatus, number> {
+  const out: Record<KpiStatus, number> = { green: 0, amber: 0, red: 0, unknown: 0 };
+  for (const k of allKpis()) {
+    if (!k.thresholds && !k.direction) continue;
+    out[thresholdStatus(k.id)] += 1;
+  }
+  return out;
+}

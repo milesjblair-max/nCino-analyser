@@ -42,6 +42,8 @@ change it.
 |---|---|
 | `src/components/tab-bar.tsx` | Top tabs. To add a tab: append to TABS here and add a case in App.tsx. |
 | `src/components/sparkline.tsx` | Hand-written inline SVG sparkline. |
+| `src/components/score-chart.tsx` | Multi-line SVG chart for the four scores. Edit `SCORE_SPEC` at the top to change lines/colours. |
+| `src/components/log-consistency.tsx` | 28-day bi-daily logging grid + missed-count card. Uses `loggingStats()` from `lib/kpi.ts`. |
 | `src/components/form-renderer.tsx` | Reads a form JSON and renders inputs. One switch case per field type. Add a type by adding a case. |
 
 ## Lib
@@ -51,7 +53,7 @@ change it.
 | `src/lib/types.ts` | Shared TS type names. Light typing — most config flows as untyped JSON. |
 | `src/lib/storage.ts` | localStorage wrapper. KEYS lists every storage key the app owns. exportAll(), importAll(), markExported(), daysSinceLastExport(), and resetAll() power Settings + the stale-backup banner. |
 | `src/lib/phase.ts` | Phase + anchor + day-difference math. currentPhase() and isDailyDepressiveLoadDay() drive UI behaviour. |
-| `src/lib/kpi.ts` | Numeric series extraction, threshold status, outcome roll-up, Habit 2 verification rate. |
+| `src/lib/kpi.ts` | Numeric series extraction, threshold status, outcome roll-up, Habit 2 verification rate, `loggingStats()` (missed bi-dailies + 28-day grid), `statusCounts()` (KPI green/amber/red tallies). |
 
 ## Docs
 
