@@ -2,6 +2,11 @@
 
 Append-only. Newest entries on top. Each entry: date, what changed, why (in one sentence if needed).
 
+## 2026-05-12 — Today indicator + current-phase progress
+
+- "Today: {date}" badge added to Plan and Roadmap so the date the app is using is always visible. `todayString()` reads from the browser's `new Date()`, so it tracks the device clock.
+- Current phase header on Roadmap now shows a progress bar with "Day X of Y · N%" and "Nd remaining" inside the header card.
+
 ## 2026-05-12 — Roadmap: phase description cards
 
 - Every phase now renders a header card at the top of its section: phase ID, name, focus text from `timeline.json`, start/end dates, depressive-load cadence. Current phase is outlined in solid green with a "current" badge.
