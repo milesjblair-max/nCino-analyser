@@ -2,6 +2,14 @@
 
 Append-only. Newest entries on top. Each entry: date, what changed, why (in one sentence if needed).
 
+## 2026-05-12 — Backup, restore, and stale-backup reminder
+
+- Settings → Backup uses the Web Share API (iOS Share Sheet → Save to Files / iCloud Drive / email). Falls back to a download on desktop.
+- Settings → Restore reads a previously-saved JSON file and replaces localStorage. Reloads on success.
+- Last-backup timestamp shown in Settings. `meta_last_export_iso` tracks it.
+- Stale-backup banner sits between the header and the tab bar whenever the last backup was > 7 days ago or never. Dismissed by tapping "Back up now".
+- Settings explains the iOS "Add to Home Screen" trick — once added, iOS Safari stops the 7-day silent eviction.
+
 ## 2026-05-12 — Today indicator + current-phase progress
 
 - "Today: {date}" badge added to Plan and Roadmap so the date the app is using is always visible. `todayString()` reads from the browser's `new Date()`, so it tracks the device clock.

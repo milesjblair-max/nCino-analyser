@@ -49,7 +49,7 @@ change it.
 | File | What it does |
 |---|---|
 | `src/lib/types.ts` | Shared TS type names. Light typing — most config flows as untyped JSON. |
-| `src/lib/storage.ts` | localStorage wrapper. KEYS lists every storage key the app owns. exportAll() and resetAll() power Settings. |
+| `src/lib/storage.ts` | localStorage wrapper. KEYS lists every storage key the app owns. exportAll(), importAll(), markExported(), daysSinceLastExport(), and resetAll() power Settings + the stale-backup banner. |
 | `src/lib/phase.ts` | Phase + anchor + day-difference math. currentPhase() and isDailyDepressiveLoadDay() drive UI behaviour. |
 | `src/lib/kpi.ts` | Numeric series extraction, threshold status, outcome roll-up, Habit 2 verification rate. |
 

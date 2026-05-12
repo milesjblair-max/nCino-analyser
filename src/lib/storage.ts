@@ -12,6 +12,11 @@ export const KEYS = {
   configOverrides: "system_config_overrides",
 } as const;
 
+// Tracked separately so a restore from JSON doesn't reset the timestamp.
+export const META_KEYS = {
+  lastExport: "meta_last_export_iso",
+} as const;
+
 export type LogKey = typeof KEYS[keyof typeof KEYS];
 
 export function getLogs(key: LogKey): LogEntry[] {
@@ -71,8 +76,60 @@ export function resetAll() {
   for (const key of Object.values(KEYS)) {
     localStorage.removeItem(key);
   }
+  for (const key of Object.values(META_KEYS)) {
+    localStorage.removeItem(key);
+  }
 }
 
 export function newId(): string {
   return `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+}
+
+// Stamp the last export so we can nag the user when overdue.
+export function markExported() {
+  localStorage.setItem(META_KEYS.lastExport, new Date().toISOString());
+}
+
+export function getLastExportIso(): string | null {
+  return localStorage.getItem(META_KEYS.lastExport);
+}
+
+export function daysSinceLastExport(): number | null {
+  const iso = getLastExportIso();
+  if (!iso) return null;
+  const then = new Date(iso).getTime();
+  const now = Date.now();
+  return Math.floor((now - then) / (1000 * 60 * 60 * 24));
+}
+
+// Replace local data from a JSON dump (the one exportAll() produces).
+// Returns the number of keys restored and any errors encountered.
+export function importAll(json: string): { restored: number; errors: string[] } {
+  const errors: string[] = [];
+  let restored = 0;
+  let parsed: any;
+  try {
+    parsed = JSON.parse(json);
+  } catch {
+    return { restored: 0, errors: ["File is not valid JSON."] };
+  }
+  if (typeof parsed !== "object" || parsed === null) {
+    return { restored: 0, errors: ["File does not contain an object."] };
+  }
+  for (const key of Object.values(KEYS)) {
+    const v = parsed[key];
+    if (v === undefined) continue;
+    if (v === null) {
+      localStorage.removeItem(key);
+      restored += 1;
+      continue;
+    }
+    try {
+      localStorage.setItem(key, JSON.stringify(v));
+      restored += 1;
+    } catch (e) {
+      errors.push(`Could not restore ${key}: ${String(e)}`);
+    }
+  }
+  return { restored, errors };
 }
