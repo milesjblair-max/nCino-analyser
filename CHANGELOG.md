@@ -2,6 +2,12 @@
 
 Append-only. Newest entries on top. Each entry: date, what changed, why (in one sentence if needed).
 
+## 2026-05-12 — Roadmap: phase description cards
+
+- Every phase now renders a header card at the top of its section: phase ID, name, focus text from `timeline.json`, start/end dates, depressive-load cadence. Current phase is outlined in solid green with a "current" badge.
+- Phase-start anchors are no longer listed as separate milestones — the header card absorbs them.
+- Milestones (Today, anchors, derived events) nest inside the phase they belong to.
+
 ## 2026-05-12 — Roadmap: switch to event-based layout
 
 - Roadmap no longer renders a strict proportional time axis. The previous version left ~600px of blank space in the post-Day-180 stretch (no events between Feb 2027 and Oct 2027).
