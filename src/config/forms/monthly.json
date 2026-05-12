@@ -1,0 +1,60 @@
+{
+  "_note": "Monthly review. End of month, 45 minutes. Sparkline trends auto-render from prior 4 weeks of bi-daily logs.",
+  "title": "Monthly review",
+  "cadence_days": 30,
+  "fields": [
+    {
+      "id": "entry_date",
+      "type": "date",
+      "label": "Review date",
+      "required": true
+    },
+    {
+      "id": "trend_stress",
+      "type": "trend_reflection",
+      "label": "Stress — 4-week trend",
+      "kpi": "stress_score"
+    },
+    {
+      "id": "trend_anxiety",
+      "type": "trend_reflection",
+      "label": "Anxiety — 4-week trend",
+      "kpi": "anxiety_score"
+    },
+    {
+      "id": "trend_depressive_load",
+      "type": "trend_reflection",
+      "label": "Depressive load — 4-week trend",
+      "kpi": "depressive_load"
+    },
+    {
+      "id": "trend_presence",
+      "type": "trend_reflection",
+      "label": "Presence — 4-week trend",
+      "kpi": "presence_score"
+    },
+    {
+      "id": "habit_2_confirmation_rate",
+      "type": "auto_metric",
+      "label": "Habit 2 confirmation rate this month",
+      "source": "computed_habit_2_rate",
+      "kpi": "habit_2_7day_verification"
+    },
+    {
+      "id": "work_behaviour_examples",
+      "type": "textarea",
+      "label": "Work behaviour change — concrete examples"
+    },
+    {
+      "id": "evidence_cycle_breaking",
+      "type": "textarea",
+      "label": "Evidence (separate from feelings) that the cycle is breaking"
+    },
+    {
+      "id": "hypothesis_if_flat",
+      "type": "textarea",
+      "label": "Hypothesis if trend is flat or negative",
+      "help": "Only fill in if any of the four scores are flat or trending the wrong way."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "_note": "Weekly synthesis. Sundays, 20–30 minutes. Habit 2 verifications auto-list from prior week's bi-daily logs.",
+  "title": "Weekly synthesis",
+  "cadence_days": 7,
+  "weekday": 0,
+  "fields": [
+    {
+      "id": "entry_date",
+      "type": "date",
+      "label": "Synthesis date",
+      "required": true
+    },
+    {
+      "id": "internal_questions",
+      "type": "three_text",
+      "label": "Three dominant internal questions this week",
+      "kpi": "internal_questions",
+      "help": "Write down the three questions you found yourself asking most in your own head this week. Do not edit them to sound better."
+    },
+    {
+      "id": "substitution_audit",
+      "type": "textarea",
+      "label": "Substitution audit — is a new escape forming?",
+      "kpi": "substitution_audit"
+    },
+    {
+      "id": "habit_2_verifications",
+      "type": "auto_verifications",
+      "label": "Habit 2 7-day action verification (auto-listed from prior week)",
+      "source": "bi_daily_logs",
+      "lookback_days": 7,
+      "filter": "habit_2_state",
+      "kpi": "habit_2_7day_verification"
+    },
+    {
+      "id": "speed_audit",
+      "type": "number",
+      "label": "Speed audit items this week (count)",
+      "min": 0,
+      "kpi": "speed_audit"
+    },
+    {
+      "id": "handover_hours",
+      "type": "number",
+      "label": "Handover hours this week",
+      "min": 0,
+      "kpi": "handover_discipline"
+    },
+    {
+      "id": "handover_scope_breach",
+      "type": "radio",
+      "label": "First-30-days scope breach this week?",
+      "options": ["no", "yes"],
+      "kpi": "handover_discipline"
+    },
+    {
+      "id": "one_adjustment",
+      "type": "textarea",
+      "label": "ONE adjustment for next week",
+      "required": true,
+      "help": "Only one. If you write more than one, you have not chosen."
+    }
+  ]
+}

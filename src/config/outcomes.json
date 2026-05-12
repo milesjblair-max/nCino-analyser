@@ -1,0 +1,81 @@
+{
+  "outcomes": [
+    {
+      "id": "O1",
+      "name": "Operating-system change",
+      "summary": "From 'am I doing enough / what next / keep moving' to 'is this the right thing / what is here / present without manufactured urgency.' Stop treating baseline existence as urgency.",
+      "kpis": ["internal_questions", "presence_score", "speed_audit", "automatic_moment"],
+      "status_rules": {
+        "on_track": "presence trending up over 4 weeks AND internal-question audit shows shift away from urgency framing",
+        "watching": "presence flat or internal questions unchanged for 2+ weeks",
+        "off_track": "presence trending down OR urgency questions still dominate after week 8 of detox"
+      }
+    },
+    {
+      "id": "O2",
+      "name": "Break the 3↔4 loop",
+      "summary": "Absolute cessation long enough for the system to learn anxiety resolves without discharge. Cannot be partially broken.",
+      "kpis": ["loop_activations", "loop_break_attempts", "habit_4_bad_decisions", "habit_instances"],
+      "status_rules": {
+        "on_track": "during detox: zero unplanned 3/4 instances",
+        "watching": "1 unplanned instance during detox",
+        "off_track": "2+ unplanned instances during detox (Day 90 question 1 threshold)"
+      }
+    },
+    {
+      "id": "O3",
+      "name": "Preserve reflective capacity without escape function",
+      "summary": "Protect the value of reflection without letting escape ride along. Reflective capacity migrates to structured journaling during detox.",
+      "kpis": ["habit_2_state", "habit_2_7day_verification", "substitution_audit"],
+      "status_rules": {
+        "on_track": "Habit 2 7-day verification rate ≥ 70% on settled-coded instances; structured journaling producing insights",
+        "watching": "verification rate 50–70%",
+        "off_track": "verification rate < 50% OR no journaling insights for 3+ weeks"
+      }
+    },
+    {
+      "id": "O4",
+      "name": "Replace automaticity with conscious interruption",
+      "summary": "Stop using speed and over-execution as identity regulation. Tolerate incompletion, stillness, slack, non-urgency.",
+      "kpis": ["work_behaviour_flags", "speed_audit", "loop_break_attempts", "presence_score"],
+      "status_rules": {
+        "on_track": "weekly work behaviour flag count trending down; end-of-task pause held",
+        "watching": "flag count flat",
+        "off_track": "flag count trending up OR end-of-task pause regularly skipped"
+      }
+    },
+    {
+      "id": "O5",
+      "name": "Lower accumulated stress structurally",
+      "summary": "Habits are downstream of stress accumulation. Test: stress declines structurally, not in tracked-and-suppressed form.",
+      "kpis": ["stress_score", "anxiety_score", "depressive_load", "work_behaviour_flags", "substitution_audit"],
+      "status_rules": {
+        "on_track": "stress scores trending down across months AND holding through known high-load weeks",
+        "watching": "stress flat OR pattern of low weekday / spike Friday",
+        "off_track": "stress trending up OR clear suppression pattern"
+      }
+    },
+    {
+      "id": "O6",
+      "name": "Prevent import of consulting cycle into King Size",
+      "summary": "Bounded scope. Slower decision velocity. No demonstration-through-speed.",
+      "kpis": ["internal_questions", "work_behaviour_flags", "handover_discipline", "habit_4_bad_decisions"],
+      "status_rules": {
+        "on_track": "first-30-days scope held; decision-velocity rule held; questions about 'whether/what' dominate",
+        "watching": "scope creep flagged but contained; questions mixed",
+        "off_track": "scope breach OR same-day significant decisions OR urgency questions return"
+      }
+    },
+    {
+      "id": "O7",
+      "name": "Prove change survives real stress",
+      "summary": "September detox + October King Size + December pregnancy timing is the stress test. Change in calm periods is not yet change.",
+      "kpis": ["internal_questions", "stress_score", "presence_score", "loop_activations", "handover_discipline"],
+      "status_rules": {
+        "on_track": "three of four Day 90 markers favourable",
+        "watching": "two of four Day 90 markers favourable",
+        "off_track": "fewer than two favourable; timeline shifts"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "_note": "Mini-form shown on non-bi-daily days during phases where depressive_load_cadence is 'daily'. Captures depressive load only — full bi-daily still runs on its cadence.",
+  "title": "Daily depressive-load log (detox)",
+  "fields": [
+    {
+      "id": "entry_date",
+      "type": "date",
+      "label": "Date",
+      "required": true
+    },
+    {
+      "id": "depressive_load",
+      "type": "score",
+      "label": "Depressive load (1–10 peak)",
+      "min": 1,
+      "max": 10,
+      "kpi": "depressive_load"
+    },
+    {
+      "id": "note",
+      "type": "textarea",
+      "label": "Note (optional)"
+    }
+  ]
+}

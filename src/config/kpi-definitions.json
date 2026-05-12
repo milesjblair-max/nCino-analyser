@@ -1,0 +1,147 @@
+{
+  "kpis": [
+    {
+      "id": "stress_score",
+      "label": "Stress",
+      "scale": "1-10 peak (not average)",
+      "source": "bi-daily",
+      "field": "stress",
+      "direction": "lower_is_better",
+      "thresholds": { "escalate_at": 8, "watch_at": 6 },
+      "outcomes": ["O1", "O2", "O4", "O5", "O7"]
+    },
+    {
+      "id": "anxiety_score",
+      "label": "Anxiety",
+      "scale": "1-10 peak",
+      "source": "bi-daily",
+      "field": "anxiety",
+      "direction": "lower_is_better",
+      "thresholds": { "escalate_at": 8, "watch_at": 6 },
+      "outcomes": ["O1", "O2", "O4", "O5", "O7"]
+    },
+    {
+      "id": "depressive_load",
+      "label": "Depressive load",
+      "scale": "1-10 peak",
+      "source": "bi-daily-or-daily",
+      "field": "depressive_load",
+      "direction": "lower_is_better",
+      "thresholds": { "escalate_at": 7, "watch_at": 5 },
+      "clinical_rule": "If sustained at escalate_at or above across 3+ consecutive days during detox, contact clinician. Not 'wait and see.'",
+      "outcomes": ["O1", "O2", "O4", "O5", "O7"]
+    },
+    {
+      "id": "presence_score",
+      "label": "Presence",
+      "scale": "1-10 peak",
+      "source": "bi-daily",
+      "field": "presence",
+      "direction": "higher_is_better",
+      "thresholds": { "watch_at": 5 },
+      "outcomes": ["O1", "O4", "O7"]
+    },
+    {
+      "id": "habit_instances",
+      "label": "Habit instances since last entry",
+      "scale": "count per habit (1-4)",
+      "source": "bi-daily",
+      "field": "habit_instances",
+      "outcomes": ["O2"]
+    },
+    {
+      "id": "loop_activations",
+      "label": "3↔4 loop activations",
+      "scale": "count",
+      "source": "bi-daily",
+      "field": "loop_instances",
+      "outcomes": ["O2", "O4", "O7"]
+    },
+    {
+      "id": "loop_break_attempts",
+      "label": "Loop-break attempts (20-min delay practised)",
+      "scale": "count, regardless of outcome",
+      "source": "bi-daily",
+      "field": "loop_break_attempts",
+      "outcomes": ["O2", "O4"]
+    },
+    {
+      "id": "habit_4_bad_decisions",
+      "label": "Habit 4 → bad decision downstream",
+      "scale": "free text + count",
+      "source": "bi-daily",
+      "field": "habit_4_decisions",
+      "outcomes": ["O2", "O6"]
+    },
+    {
+      "id": "habit_2_state",
+      "label": "Habit 2 state at instance",
+      "scale": "settled / activated",
+      "source": "bi-daily",
+      "field": "habit_2_state",
+      "outcomes": ["O3", "O4"]
+    },
+    {
+      "id": "habit_2_7day_verification",
+      "label": "Habit 2 7-day action verification rate",
+      "scale": "% yes",
+      "source": "weekly",
+      "field": "habit_2_verifications",
+      "outcomes": ["O3", "O4"]
+    },
+    {
+      "id": "work_behaviour_flags",
+      "label": "Work behaviour flags",
+      "scale": "multi-select count",
+      "source": "bi-daily",
+      "field": "work_flags",
+      "options": [
+        "rushed_ahead",
+        "took_on_others_work",
+        "couldnt_stop_at_completion",
+        "manufactured_urgency"
+      ],
+      "outcomes": ["O1", "O4", "O5", "O6"]
+    },
+    {
+      "id": "speed_audit",
+      "label": "Speed audit items",
+      "scale": "weekly count",
+      "source": "weekly",
+      "field": "speed_audit",
+      "outcomes": ["O1", "O4", "O5", "O6"]
+    },
+    {
+      "id": "automatic_moment",
+      "label": "Most automatic moment of the period",
+      "scale": "free text",
+      "source": "bi-daily",
+      "field": "automatic_moment",
+      "outcomes": ["O1"]
+    },
+    {
+      "id": "substitution_audit",
+      "label": "Substitution audit — new escape forming?",
+      "scale": "free text",
+      "source": "weekly",
+      "field": "substitution_audit",
+      "outcomes": ["O2", "O3", "O5"]
+    },
+    {
+      "id": "internal_questions",
+      "label": "Internal-question audit",
+      "scale": "three free-text questions per week",
+      "source": "weekly",
+      "field": "internal_questions",
+      "outcomes": ["O1", "O6", "O7"]
+    },
+    {
+      "id": "handover_discipline",
+      "label": "Handover hours / first-30-days scope adherence",
+      "scale": "hours/week + breach yes/no",
+      "source": "weekly",
+      "field": "handover",
+      "outcomes": ["O6", "O7"]
+    }
+  ]
+}
