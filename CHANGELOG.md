@@ -2,6 +2,14 @@
 
 Append-only. Newest entries on top. Each entry: date, what changed, why (in one sentence if needed).
 
+## 2026-05-12 — Roadmap tab + mobile UI fixes
+
+- New `src/pages/roadmap.tsx`: visual roadmap with phase bands proportional to duration and milestone dots on a vertical spine. Detox phases (P2–P4) shown in solid dark green; pregnancy milestones in rose; Day 180 review in amber.
+- Tab bar is now horizontally scrollable on narrow viewports — necessary now that six tabs exist (Plan / Roadmap / Timeline / Log / Dashboard / Settings).
+- App shell: `overflow-x-hidden` on the root, `pb-24` on main to clear the iOS bottom address bar, `viewport-fit=cover` for notched devices.
+- Dashboard score table is now horizontally scrollable when the viewport is too narrow.
+- Status chips on Plan and Timeline use `whitespace-nowrap`; sibling text containers got `min-w-0 flex-1` so long labels wrap rather than push siblings off-screen.
+
 ## 2026-05-12 — Dark-green palette
 
 - White-dominant theme with a dark forest-green header band (`emerald-900`).

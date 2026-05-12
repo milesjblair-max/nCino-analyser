@@ -70,13 +70,13 @@ export function PlanPage() {
             return (
               <div key={o.id} className="border border-stone-300 rounded p-4 bg-white">
                 <div className="flex items-start justify-between gap-3">
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <div className="font-medium text-stone-900">
                       {o.id}. {o.name}
                     </div>
                     <p className="text-sm text-stone-700 mt-1">{o.summary}</p>
                   </div>
-                  <span className={"text-xs px-2 py-0.5 rounded border " + STATUS_COLORS[s]}>{STATUS_LABEL[s]}</span>
+                  <span className={"text-xs px-2 py-0.5 rounded border whitespace-nowrap flex-shrink-0 " + STATUS_COLORS[s]}>{STATUS_LABEL[s]}</span>
                 </div>
                 <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {o.kpis.map((kpiId) => {

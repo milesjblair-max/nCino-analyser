@@ -30,6 +30,7 @@ change it.
 | File | What it does |
 |---|---|
 | `src/pages/plan.tsx` | Current phase card, anchor distances, seven outcomes with rolled-up KPI status. |
+| `src/pages/roadmap.tsx` | Visual roadmap. Left column = phase bands sized proportionally to duration; right column = milestone dots on a vertical spine. |
 | `src/pages/timeline.tsx` | Forward-looking phase-by-phase view from today onward. Each phase card lists the anchors and derived events falling inside it. |
 | `src/pages/log.tsx` | Buttons → renders the chosen form via FormRenderer. Saves to localStorage. Daily mini-form auto-shows during detox phases. |
 | `src/pages/dashboard.tsx` | KPI sparklines, Habit 2 verification rate, scrollable internal-question audit. |

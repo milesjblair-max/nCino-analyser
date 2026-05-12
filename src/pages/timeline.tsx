@@ -92,7 +92,7 @@ export function TimelinePage() {
               }
             >
               <div className="flex items-start justify-between gap-3">
-                <div>
+                <div className="min-w-0 flex-1">
                   <div className="font-semibold text-stone-900">{p.name}</div>
                   <div className="text-xs text-stone-500 mt-0.5">
                     {formatLongDate(startDate)}
@@ -101,7 +101,7 @@ export function TimelinePage() {
                 </div>
                 <span
                   className={
-                    "text-[10px] uppercase tracking-wide px-2 py-0.5 rounded border " +
+                    "text-[10px] uppercase tracking-wide px-2 py-0.5 rounded border whitespace-nowrap flex-shrink-0 " +
                     (isCurrent
                       ? "border-emerald-900 bg-emerald-900 text-white"
                       : isPast
@@ -145,7 +145,7 @@ function EventRow({ entry, today }: { entry: TimelineEntry; today: string }) {
 
   return (
     <li className="flex items-start justify-between gap-3 text-sm">
-      <div className={isPast ? "text-stone-400" : "text-stone-800"}>
+      <div className={"min-w-0 flex-1 " + (isPast ? "text-stone-400" : "text-stone-800")}>
         <div className="font-medium">{entry.label}</div>
         <div className="text-xs text-stone-500">
           {formatLongDate(entry.date)}{" "}
