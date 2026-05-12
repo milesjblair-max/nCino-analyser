@@ -24,7 +24,7 @@ export default function App() {
       <header className="bg-emerald-900 text-white">
         <div className="max-w-4xl mx-auto px-4 py-3">
           <h1 className="text-lg font-semibold">Behaviour Tracker</h1>
-          <p className="text-xs text-emerald-100/80">Personal. Local. The artefact is the modification loop.</p>
+          <p className="text-xs text-emerald-100/80">Habits, scores, milestones — through the phases.</p>
         </div>
       </header>
       {backupStale && tab !== "settings" && (
@@ -54,7 +54,7 @@ export default function App() {
         {tab === "settings" && <SettingsPage />}
       </main>
       <footer className="border-t border-stone-200 py-3 text-center text-xs text-stone-400">
-        localStorage only · export from Settings · open the project in Claude Code to modify
+        Data lives on this device. Back up regularly from Settings.
       </footer>
     </div>
   );
