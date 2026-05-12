@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { TabBar, type TabId } from "./components/tab-bar";
 import { PlanPage } from "./pages/plan";
+import { RoadmapPage } from "./pages/roadmap";
 import { TimelinePage } from "./pages/timeline";
 import { LogPage } from "./pages/log";
 import { DashboardPage } from "./pages/dashboard";
@@ -13,7 +14,7 @@ export default function App() {
   const [tab, setTab] = useState<TabId>("plan");
 
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="min-h-full flex flex-col overflow-x-hidden">
       <header className="bg-emerald-900 text-white">
         <div className="max-w-4xl mx-auto px-4 py-3">
           <h1 className="text-lg font-semibold">Behaviour Tracker</h1>
@@ -21,8 +22,9 @@ export default function App() {
         </div>
       </header>
       <TabBar active={tab} onChange={setTab} />
-      <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-6">
+      <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-6 pb-24">
         {tab === "plan" && <PlanPage />}
+        {tab === "roadmap" && <RoadmapPage />}
         {tab === "timeline" && <TimelinePage />}
         {tab === "log" && <LogPage />}
         {tab === "dashboard" && <DashboardPage />}

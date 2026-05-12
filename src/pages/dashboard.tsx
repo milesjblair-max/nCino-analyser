@@ -27,8 +27,8 @@ export function DashboardPage() {
     <div className="space-y-8">
       <section>
         <h2 className="text-base font-semibold text-stone-900 mb-2">Score trends (last 28 entries)</h2>
-        <div className="border border-stone-300 rounded bg-white">
-          <table className="w-full text-sm">
+        <div className="border border-stone-300 rounded bg-white overflow-x-auto">
+          <table className="w-full text-sm min-w-[420px]">
             <thead className="text-left text-xs text-stone-500 border-b border-stone-200">
               <tr>
                 <th className="px-3 py-2">KPI</th>
